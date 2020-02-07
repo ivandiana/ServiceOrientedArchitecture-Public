@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  retrogamingwebapi:
+    image: ${DOCKER_REGISTRY-}retrogamingwebapi
+    build:
+      context: .
+      dockerfile: RetroGamingWebAPI/Dockerfile
+
+  frontend:
+    image: ${DOCKER_REGISTRY-}retrogamingspa
+    build: 
+      context: .
+      dockerfile: Frontend/RetroGamingSPA/Dockerfile

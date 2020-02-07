@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  retrogamingwebapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_HTTPS_PORT=44366
+      - ConnectionStrings__RetroGamingContext=Server=tcp:sqlserver.retrogaming.local;Database=RetroGaming2048;User Id=sa;Password=Pass@word;Trusted_Connection=False;
+    ports:
+      - "49154:80"
+      - "44366:443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    networks:
+      - backend
+
+  frontend:
+    ports:
+      - "4200:80"
+
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
